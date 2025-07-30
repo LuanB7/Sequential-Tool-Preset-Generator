@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENISHAW Sequential Tool Preset Generator by Luan</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="resources/css/global.css">
+</head>
+<body>
+
+    <div class="body">
+        <header>
+            <div class="header-logo">
+                <img src="resources/images/RENISHAW-ICON.png" alt="">
+                <h1>Sequential Tool Preset Generator <span>by Luan</span></h1>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="" class="selected"><i class="fa-solid fa-forward"></i>Nova Sequência</a></li>
+                    <li><a href=""><i class="fa-solid fa-grip"></i>Templates</a></li>
+                    <li><a href=""><i class="fa-solid fa-gear"></i>Definições</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <header>
+                <h1>Nova Medição de Ferramentas em Sequencia</h1>
+                <button class="d-button" onclick="newToolModal(true)"><i class="fa-solid fa-plus"></i>Nova Ferramenta</button>
+            </header>
+
+            <div class="tools">
+
+                <!-- 
+                <div class="tool">
+                    <h2 class="tool-name" data-value="FR D10 3C">1. FR D10 3C</h2>
+                    <ul>
+                        <li>
+                            <h3>Número da Ferramenta (T)</h3>
+                            <h4 class="tool-number" data-value="8">8</h4>
+                        </li>
+
+                        <li>
+                            <h3>Diâmetro</h3>
+                            <h4 class="tool-diameter" data-value="10.">10.</h4>
+                        </li>
+
+                        <li>
+                            <h3>Comprimento aprox.</h3>
+                            <h4 class="tool-length" data-value="110.">110.</h4>
+                        </li>
+                    </ul>
+
+                    <div class="buttons">
+                        <button><i class="fa-solid fa-pencil"></i></button>
+                        <button onclick="removeTool(event)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+                -->
+                
+                
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="buttons">
+                <button class="d-button t2"><i class="fa-solid fa-grip"></i>Carregar do Template</button>
+                <button class="d-button" onclick="generateNcCode()"><i class="fa-solid fa-file-import"></i>Gerar Código NC</button>
+            </div>
+        </footer>
+    </div>
+
+    <div class="black-back" onclick="newToolModal(), ncCodeModal()"></div>
+
+    <div class="new-tool-modal">
+        <h1>Nova Ferramenta</h1>
+
+        <div class="grid">
+            <div>
+                <h2>Número da Ferramenta (T)</h2>
+                <input type="number" name="" id="">
+            </div>
+
+            <div>
+                <h2>Diâmetro</h2>
+                <input type="text" name="" id="">
+            </div>
+
+            <div>
+                <h2>Comprimento Aproximado</h2>
+                <input type="text" name="" id="">
+            </div>
+
+            <div>
+                <h2>Nome da Ferramenta (Opcional)</h2>
+                <input type="text" name="" id="">
+            </div>
+            
+        </div>
+
+        <div class="buttons">
+            <button class="d-button t2" onclick="newToolModal()"><i class="fa-solid fa-xmark"></i>Cancelar</button>
+            <button class="d-button confirm-button"><i class="fa-solid fa-check"></i>Confirmar</button>
+        </div>
+    </div>
+
+
+    <div class="nc-code-modal">
+        <h1>Código NC Gerado<i class="fa-solid fa-check"></i></h1>
+        <div class="code">
+            (PRESET VARIAS FERRAMENTAS)
+            #531=98. (NUMERO DA FERRAMENTA)
+            #532=0. (DIA DA FERRAMENTA)
+            #533=45. (COMPRIMENTO DA FERRAMENTA)
+
+            G90 G17 G40 G80
+            G54
+
+            G100T#531
+
+            G65 P8857 B3 D#532 Y#533
+
+            M403
+            G00 G28 G91 Z0.
+            G00 G28 G91 X0. Y0.
+            G90
+
+            (PRESET 2 FERRAMENTA)
+            #531=98. (NUMERO DA FERRAMENTA)
+            #532=0. (DIA DA FERRAMENTA)
+            #533=45. (COMPRIMENTO DA FERRAMENTA)
+
+
+            G90 G17 G40 G80
+            G54
+
+            G100T#531
+
+            G65 P8857 B3 D#532 Y#533
+
+            M403
+            G00 G28 G91 Z0.
+            G00 G28 G91 X0. Y0.
+            G90
+
+            (PRESET 3 FERRAMENTA)
+            #531=98. (NUMERO DA FERRAMENTA)
+            #532=0. (DIA DA FERRAMENTA)
+            #533=45. (COMPRIMENTO DA FERRAMENTA)
+
+
+            G90 G17 G40 G80
+            G54
+
+            G100T#531
+
+            G65 P8857 B3 D#532 Y#533
+
+            M403
+            G00 G28 G91 Z0.
+            G00 G28 G91 X0. Y0.
+            G90
+            M30
+
+
+
+
+
+
+            M30
+
+            M30
+
+        </div>
+
+        <div class="buttons">
+            <button class="d-button t2" onclick="ncCodeModal()"><i class="fa-solid fa-xmark"></i>Fechar</button>
+            <button class="d-button t2"><i class="fa-solid fa-grip"></i>Salvar Template</button>
+            <button class="d-button confirm-button" onclick="saveNcFile()"><i class="fa-solid fa-download"></i>Baixar</button>
+        </div>
+    </div>
+
+    <script src="resources/js/main.js"></script>
+    <script src="resources/js/nc-code.js"></script>    
+</body>
+</html>
