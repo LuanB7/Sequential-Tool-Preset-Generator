@@ -20,6 +20,33 @@ function ncCodeModal(boolean, code) {
 
 }
 
+function replaceToolParameters(text, element) {
+
+
+    let replaceParametersFor = {
+        "tool-name": element.t_name,
+        "tool-number": element.t_number,
+        "tool-diameter": element.t_diameter,
+        "tool-length": element.t_length,
+    }
+
+    const formatedParametersForRegex = Object.keys(replaceParametersFor).join("|");
+    const regex = new RegExp(`(?<!\\w)(${formatedParametersForRegex})(?!\\w)`, "g");
+
+    const replacedText = text.replace(regex, (match)=> {
+        const value = replaceParametersFor[match];
+
+        if (value !== undefined) {
+            return value;
+        } else {
+            return match;
+        }
+    });
+
+    return replacedText;
+
+}
+
 
 function generateNcCode(array) {
     /* let templateArray = [
@@ -28,6 +55,26 @@ function generateNcCode(array) {
         {t_number: 4, t_diameter: "6.", t_length: "90.", t_name: "FR D6"},
         {t_number: 5, t_diameter: "3.", t_length: "82.", t_name: "FR D3"},
     ] */
+
+    let patternsStorage = localStorage.getItem("routinePatterns");
+    let patternsStorageOBJ = JSON.parse(patternsStorage);
+
+    // Def Selected Pattern data --------------------------
+    let selectedPatternHeader;
+    let selectedPatternRoutine;
+    let selectedPatternFooter;
+
+    patternsStorageOBJ.forEach(element => {
+        if (localStorage.getItem("selectedPattern")) {
+            if (localStorage.getItem("selectedPattern") == element.id) {
+
+                selectedPatternHeader = element.header;
+                selectedPatternRoutine = element.routine;
+                selectedPatternFooter = element.footer;
+            }
+        }
+    });
+    // --------------------------
 
     let newObjectsArray = [];
 
@@ -69,6 +116,14 @@ function generateNcCode(array) {
     let codeString = '';
 
     newObjectsArray.forEach(element => {
+
+
+        let routine = selectedPatternRoutine;
+        //
+        routine = replaceToolParameters(selectedPatternRoutine, element);;
+
+        // Deprecated
+        /*
         let elemCode = `
 (${element.t_name} ----------)
 #531=${element.t_number} (NUMERO DA FERRAMENTA)
@@ -87,17 +142,26 @@ G00 G28 G91 Z0.
 G00 G28 G91 X0. Y0.
 G90
 
+        `; */
+
+        elemCode = `
+${routine}
         `;
 
         codeString+=elemCode;
     });
 
-    codeString = codeString.trim();
-    codeString+=`
-    
-M30
 
-    `;
+    let header = selectedPatternHeader;
+    let footer = selectedPatternFooter ;
+
+    codeString = `
+${header}
+${codeString}
+${footer}
+    `
+    codeString = codeString.trim();
+    
 
     ncCodeModal(true, codeString);
 }
@@ -109,9 +173,26 @@ function saveNcFile() {
 
     let now = new Date();
 
+    // Def Selected Pattern data --------------------------
+    let patternsStorage = localStorage.getItem("routinePatterns");
+    let patternsStorageOBJ = JSON.parse(patternsStorage);
+
+    let selectedPatternFileName
+    let selectedPatternFileExtension;
+
+    patternsStorageOBJ.forEach(element => {
+        if (localStorage.getItem("selectedPattern")) {
+            if (localStorage.getItem("selectedPattern") == element.id) {
+
+                selectedPatternFileName = element.file_name;
+                selectedPatternFileExtension = element.file_extension;
+            }
+        }
+    });
+
 
     // defaultSaveFile(`presset-${now.toLocaleString().replace(" ", "-")}.nc`, codeDOM.textContent);
-    defaultSaveFile(`O0700.nc`, codeDOM.textContent);
+    defaultSaveFile(`${selectedPatternFileName}.${selectedPatternFileExtension}`, codeDOM.textContent);
 
 }
 

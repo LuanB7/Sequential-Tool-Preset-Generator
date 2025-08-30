@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RENISHAW Sequential Tool Preset Generator by Luan</title>
+    <title>Nova Sequência | RENISHAW Sequential Tool Preset Generator by Luan</title>
 
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="resources/css/global.css">
+    <link rel="stylesheet" href="resources/css/sequence.css">
 </head>
 <body>
 
@@ -26,7 +27,8 @@
 
             <nav>
                 <ul>
-                    <li><a href="" class="selected"><i class="fa-solid fa-forward"></i>Nova Sequência</a></li>
+                    <li><a href="routine-pattern.html"><i class="fa-solid fa-puzzle-piece"></i>Padrão de Rotina</a></li>
+                    <li><a href="index.html" class="selected"><i class="fa-solid fa-forward"></i>Nova Sequência</a></li>
                     <li><a href=""><i class="fa-solid fa-grip"></i>Templates</a></li>
                     <li><a href=""><i class="fa-solid fa-gear"></i>Definições</a></li>
                 </ul>
@@ -36,7 +38,23 @@
         <main>
             <header>
                 <h1>Nova Medição de Ferramentas em Sequencia</h1>
-                <button class="d-button" onclick="newToolModal(true)"><i class="fa-solid fa-plus"></i>Nova Ferramenta</button>
+                <div>
+
+                    <div class="wrapper">
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                        <select name="" id="header-routine-pattern-select">
+                            <!--
+                            <option value="">Brother</option>
+                            <option value="">ROMI D760</option>
+                            <option value="">VL 610</option>
+                            -->
+                        </select>
+                    </div>
+
+
+                    <button class="d-button" onclick="newToolModal(true)"><i class="fa-solid fa-plus"></i>Nova Ferramenta</button>
+                </div>
+                
             </header>
 
             <div class="tools">
@@ -191,7 +209,24 @@
         </div>
     </div>
 
+    <div class="confirmation-modal">
+        <div class="text">
+            <h1>Excluir Padrão de Rotina?</h1>
+            <h2>Confirmar exclusão do padrão de rotina "Brother"?</h2>
+        </div>
+
+        <div class="buttons">
+            <button class="d-button t2 cancel-button" type="button close-button"><i class="fa-solid fa-xmark"></i>Cancelar</button>
+            <button class="d-button confirm-button" type="button"><i class="fa-solid fa-check"></i>Confirmar</button>
+        </div>
+    </div>
+
+    <div class="notify-modal">
+        <p>Esta é uma <span>notificação</span>.</p>
+    </div>
+
     <script src="resources/js/main.js"></script>
-    <script src="resources/js/nc-code.js"></script>    
+    <script src="resources/js/nc-code.js"></script>
+    <script src="resources/js/sequence.js"></script>
 </body>
 </html>

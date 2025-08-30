@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Padrão de Rotina | RENISHAW Sequential Tool Preset Generator by Luan</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="resources/css/global.css">
+    <link rel="stylesheet" href="resources/css/routine-pattern.css">
+</head>
+<body>
+
+    <div class="body">
+        <header>
+            <div class="header-logo">
+                <img src="resources/images/RENISHAW-ICON.png" alt="">
+                <h1>Sequential Tool Preset Generator <span>by Luan</span></h1>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="routine-pattern.html"><i class="fa-solid fa-puzzle-piece"></i>Padrão de Rotina</a></li>
+                    <li><a href="index.html"><i class="fa-solid fa-forward"></i>Nova Sequência</a></li>
+                    <li><a href=""><i class="fa-solid fa-grip"></i>Templates</a></li>
+                    <li><a href=""><i class="fa-solid fa-gear"></i>Definições</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <header>
+                <h1>Novo Padrão de Rotina</h1>
+                <button class="d-button t2" onclick="toolParametersModal(true)"><i class="fa-solid fa-code"></i>Ver parâmetros</button>
+            </header>
+
+            <form action="">
+
+                <div class="input-container">
+                    <span>Nome</span>
+                    <div class="highlighting-textarea" id="input-name" contenteditable oninput="highlightParameters(event.target)" spellcheck="false"></div>
+                </div>
+
+                <div class="input-container">
+                    <span>Cabeçalho</span>
+                    <div class="highlighting-textarea" id="input-header" style="height: 200px;" contenteditable oninput="highlightParameters(event.target)" spellcheck="false"></div>
+                </div>
+
+                
+                <div class="input-container">
+                    <span>Rotina de preset</span>
+                    <div class="highlighting-textarea" id="input-routine" style="height: 500px;" contenteditable oninput="highlightParameters(event.target)" spellcheck="false"></div>
+                </div>
+
+                <div class="input-container">
+                    <span>Rodapé</span>
+                    <div class="highlighting-textarea" id="input-footer" style="height: 200px;" contenteditable oninput="highlightParameters(event.target)" spellcheck="false"></div>
+                </div>
+
+                <div class="input-container">
+                    <span>Nome do Arquivo de Saída</span>
+                    <input type="text" id="input-file-name">
+                </div>
+
+                <div class="input-container">
+                    <span>Extensão de Arquivo de Saída</span>
+                    <select name="" id="select-file-extension">
+                        <option value="nc">.NC</option>
+                        <option value="mpf">.MPF</option>
+                        <option value="txt">.TXT</option>
+                    </select>
+                </div>
+
+                <!-- <div class="input-container">
+                    <span>Nome</span>
+                    <input type="text" id="input-name">
+                </div>
+
+                <div class="input-container">
+                    <span>Cabeçalho</span>
+                    <textarea name="" id="input-header"></textarea>
+                </div>
+                
+                <div class="input-container">
+                    <span>Rotina de preset</span>
+                    <textarea name="" id="input-routine" style="height: 500px;"></textarea>
+                </div>
+
+                <div class="input-container">
+                    <span>Rodapé</span>
+                    <textarea name="" id="input-footer"></textarea>
+                </div> -->
+
+
+                <div class="radio-select-container">
+                    <span>Imagem de exibição</span>
+
+                    <div class="labels">
+                        <label for="radio-brother-tc32bnqt" class="selected">
+                            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                            <img src="resources/images/Machines/brother-tc32bnqt.png" alt="">
+                        </label>
+
+                        <label for="radio-vl-610">
+                            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                            <img src="resources/images/Machines/vl-610.png" alt="">
+                        </label>
+
+                        <label for="radio-romi-d760">
+                            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                            <img src="resources/images/Machines/romi-d760.png" alt="">
+                        </label>
+
+                        <label for="dn-solutions-vmc">
+                            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                            <img src="resources/images/Machines/dn-solutions-vmc.png" alt="">
+                        </label>
+
+                        <input type="radio" name="image-select-radio" id="radio-brother-tc32bnqt" value="brother-tc32bnqt.png" checked>
+                        <input type="radio" name="image-select-radio" id="radio-vl-610" value="vl-610.png">
+                        <input type="radio" name="image-select-radio" id="radio-romi-d760" value="romi-d760.png ">
+                        <input type="radio" name="image-select-radio" id="dn-solutions-vmc" value="dn-solutions-vmc.png ">
+                        
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="d-button t2" type="button" onclick="window.location.href = 'routine-pattern.html'"><i class="fa-solid fa-arrow-left"></i>Voltar</button>
+                    <button class="d-button" type="button" onclick="confirmFormButton()"><i class="fa-solid fa-check"></i>Confirmar</button>
+                </div>
+                
+            </form>
+
+        </main>
+
+    </div>
+
+    <div class="black-back" onclick="toolParametersModal()"></div>
+
+    <div class="tool-parameters-modal">
+        <div class="text">
+            <h1>Parâmetros de Ferramenta</h1>
+            <h2>Parâmetros para utilização no Padrão de Rotina</h2>
+        </div>
+
+        <ul>
+            <li copy-value="tool-name">
+                <h3>Nome da Ferramenta</h3>
+                <h4>tool-name</h4>
+
+                <span><i class="fa-regular fa-copy"></i>Copiar</span>
+            </li>
+
+            <li copy-value="tool-number">
+                <h3>Número da Ferramenta</h3>
+                <h4>tool-number</h4>
+
+                <span><i class="fa-regular fa-copy"></i>Copiar</span>
+            </li>
+
+            <li copy-value="tool-diameter">
+                <h3>Diâmetro da Ferramenta</h3>
+                <h4>tool-diameter</h4>
+
+                <span><i class="fa-regular fa-copy"></i>Copiar</span>
+            </li>
+
+            <li copy-value="tool-length">
+                <h3>Comprimento aproximado da Ferramenta</h3>
+                <h4>tool-length</h4>
+
+                <span><i class="fa-regular fa-copy"></i>Copiar</span>
+            </li>
+            
+        </ul>
+
+        <div class="buttons">
+            <button class="d-button t2" onclick="toolParametersModal()"><i class="fa-solid fa-xmark"></i>Fechar</button>
+        </div>
+
+    </div>
+
+    <div class="confirmation-modal">
+        <div class="text">
+            <h1>Excluir Padrão de Rotina?</h1>
+            <h2>Confirmar exclusão do padrão de rotina "Brother"?</h2>
+        </div>
+
+        <div class="buttons">
+            <button class="d-button t2 cancel-button" type="button close-button"><i class="fa-solid fa-xmark"></i>Cancelar</button>
+            <button class="d-button confirm-button" type="button"><i class="fa-solid fa-check"></i>Confirmar</button>
+        </div>
+    </div>
+
+    <div class="alert-modal"></div>
+
+    <div class="notify-modal">
+        <p>Esta é uma <span>notificação</span>.</p>
+    </div>
+
+    <script src="resources/js/main.js"></script>
+    <script src="resources/js/edit-routine-pattern.js"></script>
+</body>
+</html>
